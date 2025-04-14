@@ -1,0 +1,115 @@
+body {
+    background-color: rgb(253, 253, 214);
+    color: black;
+    font-family: Times New Roman;
+    font-size: 20px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 100%;
+    height: 100%;
+    line-height: 0.7;
+}
+
+#signup{
+    border-radius: 15px;
+    background-color: white;
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+h1{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.label{
+    float: left;
+    width: 25%;
+    margin-top: 18px;
+}
+
+.input{
+    float: left;
+    width: 75%;
+    margin-top: 7px;
+    margin-bottom: 10px;
+}
+
+input[type=text], input[type=email], input[type=tel], input[type=password], input[type=date] {
+  width: 90%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+fieldset {
+    border: 0;
+}
+
+button{
+    margin-top: 30px;
+}
+
+button[type=submit]{
+    border-radius:4px;
+    background-color: rgb(253, 253, 214);
+    color: black;
+    font-size: 15px;
+    padding: 12px 20px;
+    border: none;
+    float:right;
+}
+
+button[type=submit]:hover{
+    background-color: black;
+    color: rgb(253, 253, 214);
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 20px solid white;
+    margin-top:-10px;
+}
+
+.header-right input[type=text] {
+    float: left;
+    padding: 11px;
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+    margin-top: 4px;
+    font-size: 15px;
+    width: 250px;
+}
+
+.header-right a {
+    margin-left: 20px; 
+}
+
+.valid {
+    color: green;
+    font-weight: bold;
+}
+
+.invalid {
+    color: red;
+    font-weight: bold;
+}
+
+.login-home a{
+    color: black;
+    text-decoration: none;
+}
+
+.login-home a:hover{
+    text-decoration: underline;
+    color: blue;
+    font-weight: bold;
+}

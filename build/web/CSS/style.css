@@ -1,0 +1,33 @@
+body {
+    background-color: rgb(253, 253, 214);
+    color: black;
+    font-family: Times New Roman;
+    font-size: 15px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 100%;
+    line-height: 0.7;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 20px solid white;
+    margin-top:-10px;
+}
+
+.header-right input[type=text] {
+    float: left;
+    padding: 11px;
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+    margin-top: 4px;
+    font-size: 15px;
+    width: 250px;
+}
+
+.header-right a {
+    margin-left: 20px; 
+}
