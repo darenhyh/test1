@@ -30,7 +30,8 @@ public class User {
     private String password;
 
     // Constructors
-    public User() {}
+    public User() {
+    }
 
     public User(String name, String username, LocalDate birth, String email, String mobileNo, String password) {
         this.name = name;
@@ -70,8 +71,10 @@ public class User {
         return birth;
     }
 
-    public void setBirth(LocalDate birth) {
-        this.birth = birth;
+    public void setBirth(String birthStr) {
+        if (birthStr != null && !birthStr.isEmpty()) {
+            this.birth = LocalDate.parse(birthStr);
+        }
     }
 
     public String getEmail() {
