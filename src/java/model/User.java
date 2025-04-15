@@ -1,53 +1,22 @@
 package model;
 
-import jakarta.persistence.*;
-import java.time.LocalDate;
-
-@Entity
-@Table(name = "USER")
 public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // This works with GENERATED ALWAYS AS IDENTITY in Derby
-    private Long id;
-
-    @Column(nullable = false)
+    private int id;
     private String name;
-
-    @Column(nullable = false, unique = true)
     private String username;
-
-    @Column(nullable = false)
-    private LocalDate birth; // Using LocalDate instead of java.sql.Date
-
-    @Column(nullable = false, unique = true)
+    private String birth;
     private String email;
-
-    @Column(nullable = false)
     private String mobileNo;
-
-    @Column(nullable = false)
     private String password;
-
-    // Constructors
+    
     public User() {
     }
 
-    public User(String name, String username, LocalDate birth, String email, String mobileNo, String password) {
-        this.name = name;
-        this.username = username;
-        this.birth = birth;
-        this.email = email;
-        this.mobileNo = mobileNo;
-        this.password = password;
-    }
-
-    // Getters and Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -67,14 +36,12 @@ public class User {
         this.username = username;
     }
 
-    public LocalDate getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(String birthStr) {
-        if (birthStr != null && !birthStr.isEmpty()) {
-            this.birth = LocalDate.parse(birthStr);
-        }
+    public void setBirth(String birth) {
+        this.birth = birth;
     }
 
     public String getEmail() {
