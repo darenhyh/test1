@@ -35,11 +35,11 @@
                 String errorMessage = (String) request.getAttribute("errorMessage");
                 if (errorMessage != null && !errorMessage.isEmpty()) {
             %>
-            
+
             <div class="error-message" style="color: red; text-align: center; margin: 10px 0;">
                 <%= errorMessage%>
             </div>
-            
+
             <%
                 }
             %>
@@ -323,7 +323,12 @@
 
         <!-- Password validation (Meet with requirement)-->
         <script>
+            // Password validation (Meet with requirement)
             $(document).ready(function () {
+                $('#passwordInput').on('focus', function () {
+                    $('#passwordMessage').show(); // Show message box
+                });
+
                 $('#passwordInput').on('keyup', function () {
                     var password = $(this).val();
 
@@ -332,81 +337,55 @@
                     var hasNumber = /[0-9]/.test(password);
                     var hasMinLength = password.length >= 8;
 
-                    function updateValidation(element, isValid) {
+                    function updateValidation(element, isValid, text) {
                         if (isValid) {
-                            $(element).removeClass("invalid").addClass("valid").text("✔ " + $(element).text().substring(2));
+                            $(element).removeClass("invalid").addClass("valid").html("✔ " + text);
                         } else {
-                            $(element).removeClass("valid").addClass("invalid").text("✖ " + $(element).text().substring(2));
+                            $(element).removeClass("valid").addClass("invalid").html("✖ " + text);
                         }
                     }
 
-                    updateValidation('#letter', hasLowerCase);
-                    updateValidation('#capital', hasUpperCase);
-                    updateValidation('#number', hasNumber);
-                    updateValidation('#length', hasMinLength);
+                    updateValidation('#letter', hasLowerCase, "A lowercase letter");
+                    updateValidation('#capital', hasUpperCase, "A capital (uppercase) letter");
+                    updateValidation('#number', hasNumber, "A number");
+                    updateValidation('#length', hasMinLength, "Minimum 8 characters");
 
-                    // Check server-side validation only if all conditions pass
+                    // Enable or disable submit based on all criteria
                     if (hasLowerCase && hasUpperCase && hasNumber && hasMinLength) {
-                        $.ajax({
-                            type: 'POST',
-                            url: '/GlowyDays/CheckPassword',
-                            data: {password: password},
-                            success: function (response) {
-                                $('#passwordMessage span').remove(); // Remove previous messages
-                                if (response.trim() !== "Valid") {
-                                    $('#passwordMessage').append('<span style="color:red;">✖ ' + response + '</span>');
-                                }
-                            },
-                            error: function () {
-                                $('#passwordMessage span').remove();
-                                $('#passwordMessage').append('<span style="color:red;">Error validating password.</span>');
-                            }
-                        });
-                    }
-                });
-
-                // Show message box when focused
-                $('#passwordInput').focus(function () {
-                    $('#passwordMessage').show();
-                });
-
-                // Hide message box when input is empty
-                $('#passwordInput').blur(function () {
-                    if ($('#passwordInput').val() === '') {
-                        $('#passwordMessage').hide();
+                        $('button[type="submit"]').prop('disabled', false);
+                    } else {
+                        $('button[type="submit"]').prop('disabled', true);
                     }
                 });
             });
         </script>
+        <!-- End of Password validation -->
+
         <!-- End of Password validation (Meet with requirement)-->
 
-        <!-- Confirm Password validation (Must same with Password text field)-->
+        <!-- Confirm Password Validation -->
         <script>
             $(document).ready(function () {
-                function validatePassword() {
+                $('#CpasswordInput, #passwordInput').on('keyup', function () {
                     var password = $('#passwordInput').val();
                     var confirmPassword = $('#CpasswordInput').val();
 
                     if (confirmPassword.length > 0) {
-                        $('#CpasswordMessage').show(); // Ensure the message box is visible
-
-                        if (confirmPassword !== password) {
-                            $('#CpasswordMessage').html('<span style="color:red; font-size:13px;">Please reenter the same password to confirm password!</span>');
-                            $('button[type="submit"]').prop('disabled', true);
-                        } else {
-                            $('#CpasswordMessage').html('<span style="color:green; font-size:13px;">Passwords match.</span>');
+                        if (password === confirmPassword) {
+                            $('.CpasswordMessage').html('<span style="color:green; font-size:13px;">Passwords match!</span>');
                             $('button[type="submit"]').prop('disabled', false);
+                        } else {
+                            $('.CpasswordMessage').html('<span style="color:red; font-size:13px;">Passwords do not match.</span>');
+                            $('button[type="submit"]').prop('disabled', true);
                         }
                     } else {
-                        $('#CpasswordMessage').hide(); // Hide message if field is empty
+                        $('.CpasswordMessage').html('');
                     }
-                }
-
-                // Run validation when either field changes
-                $('#passwordInput, #CpasswordInput').on('keyup', validatePassword);
+                });
             });
         </script>
-        <!-- End of Confirm Password validation (Must same with Password text field)-->
+        <!-- End of Confirm Password Validation -->
+
 
     </body>
 </html>
